@@ -11,8 +11,17 @@ import Foundation
 public class OptionsRow<T: Equatable, Cell: CellType where Cell: BaseCell, Cell: TypedCellType, Cell.Value == T> : Row<T, Cell> {
     
     public var options: [T] {
-        get { return dataProvider?.arrayData ?? [] }
+        get { return dataProvider?.arrayData ?? dataProvider?.lazyArrayData?(self) ?? [] }
         set { dataProvider = DataProvider(arrayData: newValue) }
+    }
+    
+    public var lazyOptions: (BaseRowType -> [T])? {
+        get { return dataProvider?.lazyArrayData }
+        set {
+            if let value = newValue {
+                dataProvider = DataProvider(lazyArrayData: value)
+            }
+        }
     }
     
     public var selectorTitle: String?

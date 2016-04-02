@@ -24,7 +24,7 @@ public class _SelectorViewController<T: Equatable, Row: SelectableRowType where 
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        guard let options = row.dataProvider?.arrayData else { return }
+        guard let options = row.dataProvider?.arrayData ?? row.dataProvider?.lazyArrayData?(row) else { return }
         
         form +++= SelectableSection<Row, Row.Value>(row.title ?? "", selectionType: .SingleSelection(enableDeselection: true)) { [weak self] section in
             if let sec = section as? SelectableSection<Row, Row.Value> {

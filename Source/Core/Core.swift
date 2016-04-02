@@ -117,9 +117,16 @@ public enum ControllerProvider<VCType: UIViewController>{
 public struct DataProvider<T: Equatable> {
     
     public let arrayData: [T]?
+    public let lazyArrayData: (BaseRowType -> [T])?
     
     public init(arrayData: [T]){
         self.arrayData = arrayData
+        self.lazyArrayData = nil
+    }
+    
+    public init(lazyArrayData: (BaseRowType -> [T])) {
+        self.arrayData = nil
+        self.lazyArrayData = lazyArrayData
     }
 }
 

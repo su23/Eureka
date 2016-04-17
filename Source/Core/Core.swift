@@ -624,14 +624,6 @@ public class FormViewController : UIViewController, FormViewControllerProtocol {
         return true
     }
     
-    public func canEditRowAtIndexPath(indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    public func getEditActionsForRowAtIndexPath(indexPath: NSIndexPath) -> [UITableViewRowAction] {
-        return []
-    }
-    
     //MARK: Private
     
     private var oldBottomInset : CGFloat?
@@ -710,10 +702,6 @@ extension FormViewController : UITableViewDelegate {
         }
         return view.bounds.height
     }
-    
-    public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        return getEditActionsForRowAtIndexPath(indexPath)
-    }
 }
 
 extension FormViewController : UITableViewDataSource {
@@ -746,10 +734,6 @@ extension FormViewController : UITableViewDataSource {
     
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return form[section].footer?.title
-    }
-    
-    public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return canEditRowAtIndexPath(indexPath)
     }
 }
 

@@ -676,13 +676,8 @@ extension FormViewController : UITableViewDelegate {
         if let height = form[section].header?.height {
             return height()
         }
-        if let title = form[section].header?.title {
-            if !title.isEmpty {
-                return UITableViewAutomaticDimension
-            }
-        }
         guard let view = form[section].header?.viewForSection(form[section], type: .Header, controller: self) else{
-            return CGFloat.min
+            return UITableViewAutomaticDimension
         }
         guard view.bounds.height != 0 else {
             return UITableViewAutomaticDimension
@@ -721,15 +716,7 @@ extension FormViewController : UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let title = form[section].header?.title {
-            if title.isEmpty {
-                return nil
-            }
-            
-            return title
-        }
-        
-        return nil
+        return form[section].header?.title
     }
     
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
